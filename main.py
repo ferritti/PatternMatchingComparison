@@ -1,4 +1,6 @@
 import numpy as np
+import random as rd
+import string as str
 
 def naive_string_matcher(T, P):
     n = len(T)
@@ -36,3 +38,6 @@ def compute_prefix_function(P, m):
         pi[q] = k
 
     return pi
+
+def generate_random_string(length):
+    return ''.join(rd.choice(str.ascii_lowercase) for _ in range(length))
