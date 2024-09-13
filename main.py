@@ -70,12 +70,12 @@ def execution_time_comparison(text_lengths, pattern_lengths,repetitions=10):
 
     return naive_tuples, kmp_tuples
 
-#per ogni lunghezza di pattern, crea un grafico con i tempi di esecuzione per entrambi gli algoritmi e lo salva
+#per ogni lunghezza di pattern, crea un grafico con i tempi di esecuzione per entrambi gli algoritmi e lo salva.
 def plot_execution_time(naive_tuples, kmp_tuples):
     text_lengths = sorted(set(t[0] for t in naive_tuples))
     pattern_lengths = sorted(set(t[1] for t in naive_tuples))
 
-    desktop_path = os.path.join(os.path.expanduser('~'), 'Desktop', 'Latex images', 'Grafici')
+    desktop_path = os.path.join(os.path.expanduser('~'), 'Desktop', 'Latex images', 'Tempo esecuzione')
 
     for pattern_length in pattern_lengths:
         naive_times = [t[2] for t in naive_tuples if t[1] == pattern_length]
@@ -94,3 +94,25 @@ def plot_execution_time(naive_tuples, kmp_tuples):
         filename = f'grafico lunghezza pattern {pattern_length}.png'
         file_path = os.path.join(desktop_path, filename)
         plt.savefig(file_path)
+
+
+
+
+
+
+if __name__ == "__main__":
+    text_lengths_sets = {
+        "small": [10, 50, 100],
+        "medium": [100, 500, 1000],
+        "large": [5000, 7500, 50000]
+    }
+
+    pattern_lengths_sets = {
+        "small": [5, 10, 20],
+        "medium": [50, 100, 500],
+        "large": [1000, 3000, 11000]
+    }
+
+    for size in text_lengths_sets:
+        naive_tuples, kmp_tuples = execution_time_comparison(text_lengths_sets[size], pattern_lengths_sets[size])
+        plot_execution_time(naive_tuples, kmp_tuples)
