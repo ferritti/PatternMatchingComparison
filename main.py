@@ -56,3 +56,17 @@ def test_execution_time(n,m,repetitions):
     kmp_time = timeit.timeit(lambda: kmp_matcher(text, pattern), number=repetitions)/repetitions
 
     return naive_time, kmp_time
+
+#confronta i tempi di esecuzione degli algoritmi Naive e KMP su più testi e pattern di lunghezza variabile.
+def execution_time_comparison(text_lengths, pattern_lengths,repetitions=10):
+    naive_tuples = []
+    kmp_tuples = []
+
+    for text_length in text_lengths:
+        for pattern_length in pattern_lengths:
+            naive_time, kmp_time = test_execution_time(text_length, pattern_length,repetitions)
+            naive_tuples.append((text_length, pattern_length, naive_time))
+            kmp_tuples.append((text_length, pattern_length, kmp_time))
+
+    return naive_tuples, kmp_tuples
+
