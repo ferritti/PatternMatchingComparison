@@ -1,6 +1,10 @@
 import numpy as np
 import random as rd
 import string as str
+import timeit
+
+from matplotlib import pyplot as plt
+
 
 def naive_string_matcher(T, P):
     n = len(T)
@@ -39,5 +43,16 @@ def compute_prefix_function(P, m):
 
     return pi
 
+
 def generate_random_string(length):
     return ''.join(rd.choice(str.ascii_lowercase) for _ in range(length))
+
+#test per ottenere i tempi di esecuzione di naive e kmp con text e pattern stringe casuali di lunghezza rispettivamente n e m.
+def test_execution_time(n, m):
+    text = generate_random_string(n)
+    pattern = generate_random_string(m)
+
+    naive_time = timeit.timeit(lambda: naive_string_matcher(text, pattern), number=1)
+    kmp_time = timeit.timeit(lambda: kmp_matcher(text, pattern), number=1)
+
+    return naive_time, kmp_time
