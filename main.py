@@ -52,8 +52,8 @@ def test_execution_time(n,m,repetitions):
     text = generate_random_string(n)
     pattern = generate_random_string(m)
 
-    naive_time = timeit.timeit(lambda: naive_string_matcher(text, pattern), number=repetitions)/repetitions
-    kmp_time = timeit.timeit(lambda: kmp_matcher(text, pattern), number=repetitions)/repetitions
+    naive_time = timeit.timeit(lambda: naive_string_matcher(text, pattern), number=repetitions) / repetitions
+    kmp_time = timeit.timeit(lambda: kmp_matcher(text, pattern), number=repetitions) / repetitions
 
     return naive_time, kmp_time
 
@@ -76,6 +76,9 @@ def plot_execution_time(naive_tuples, kmp_tuples):
     pattern_lengths = sorted(set(t[1] for t in naive_tuples))
 
     desktop_path = os.path.join(os.path.expanduser('~'), 'Desktop', 'Latex images', 'Tempo esecuzione')
+
+    if not os.path.exists(desktop_path):
+        os.makedirs(desktop_path)
 
     for pattern_length in pattern_lengths:
         naive_times = [t[2] for t in naive_tuples if t[1] == pattern_length]
