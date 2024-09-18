@@ -1,4 +1,3 @@
-import numpy as np
 import random as rd
 import string as str
 import timeit
@@ -18,20 +17,21 @@ def naive_string_matcher(T, P):
 def kmp_matcher(T, P):
     n = len(T)
     m = len(P)
-    pi = compute_prefix_function(P, m)
+    lpc = compute_prefix_function(P, m)
     q = 0
 
     for i in range(n):
         while q > 0 and P[q] != T[i]:
-            q = pi[q]
+            q = lpc[q]
         if P[q] == T[i]:
             q += 1
         if q == m:
             #print(f"Occorrenza del pattern con spostamento {i - m + 1}")
-            q = pi[q - 1]
+            q = lpc[q - 1]
+
 
 def compute_prefix_function(P, m):
-    pi = np.zeros(m,dtype=int)
+    pi = [0] * m
     k = 0
 
     for q in range(1, m):
@@ -105,17 +105,17 @@ def plot_execution_time(naive_tuples, kmp_tuples):
 
 if __name__ == "__main__":
     text_lengths_sets = {
-        "small": [10, 50, 100],
-        "medium": [100, 500, 1000],
-        "large": [5000, 7500, 50000]
+        "small": [50, 100, 200],
+        "medium": [500, 1000, 2000],
+        "large": [5000, 10000, 20000]
     }
 
     pattern_lengths_sets = {
-        "small": [5, 10, 20],
-        "medium": [50, 100, 500],
-        "large": [1000, 3000, 11000]
+        "small": [20, 30],
+        "medium": [200, 500],
+        "large": [3000, 5000]
     }
 
-    for size in text_lengths_sets:
+for size in text_lengths_sets:
         naive_tuples, kmp_tuples = execution_time_comparison(text_lengths_sets[size], pattern_lengths_sets[size])
         plot_execution_time(naive_tuples, kmp_tuples)
