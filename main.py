@@ -43,9 +43,14 @@ def compute_prefix_function(P, m):
 
     return pi
 
-
+#Genera una stringa casuale di lunghezza specificata
 def generate_random_string(length):
     return ''.join(rd.choice(str.ascii_lowercase) for _ in range(length))
+
+#Genera un pattern ripetuto frequentemente
+def generate_repeated_pattern(length):
+   return 'abc' * (length // 3) + 'abc'[:length % 3]
+
 
 #tempo di esecuzione medio per una serie di ripetizioni di naive e kmp con text e pattern stringe casuali di lunghezza rispettivamente n e m.
 def test_execution_time(n,m,repetitions):
