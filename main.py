@@ -8,7 +8,6 @@ from matplotlib import pyplot as plt
 def naive_string_matcher(T, P):
     n = len(T)
     m = len(P)
-
     for s in range(n - m + 1):
         if T[s:s + m] == P:
             pass#print(f"Occorrenza del pattern con spostamento {s}")
@@ -19,7 +18,6 @@ def kmp_matcher(T, P):
     m = len(P)
     lpc = compute_prefix_function(P, m)
     q = 0
-
     for i in range(n):
         while q > 0 and P[q] != T[i]:
             q = lpc[q]
@@ -33,14 +31,12 @@ def kmp_matcher(T, P):
 def compute_prefix_function(P, m):
     pi = [0] * m
     k = 0
-
     for q in range(1, m):
         while k > 0 and P[k] != P[q]:
             k = pi[k - 1]
         if P[k] == P[q]:
             k += 1
         pi[q] = k
-
     return pi
 
 #Genera una stringa casuale di lunghezza specificata
@@ -52,17 +48,14 @@ def generate_repeated_pattern(length):
    return 'abc' * (length // 3) + 'abc'[:length % 3]
 
 
-#tempo di esecuzione medio per una serie di ripetizioni di naive e kmp con text e pattern stringe casuali di lunghezza rispettivamente n e m.
-def test_execution_time(n,m,repetitions):
-    text = generate_random_string(n)
-    pattern = generate_random_string(m)
+#Tempo di esecuzione medio per una serie di ripetizioni di naive e kmp con text e pattern in input
+def test_execution_time(text, pattern, repetitions):
+   naive_time = timeit.timeit(lambda: naive_string_matcher(text, pattern), number=repetitions) / repetitions
+   kmp_time = timeit.timeit(lambda: kmp_matcher(text, pattern), number=repetitions) / repetitions
+   return naive_time, kmp_time
 
-    naive_time = timeit.timeit(lambda: naive_string_matcher(text, pattern), number=repetitions) / repetitions
-    kmp_time = timeit.timeit(lambda: kmp_matcher(text, pattern), number=repetitions) / repetitions
 
-    return naive_time, kmp_time
-
-#confronta i tempi di esecuzione degli algoritmi Naive e KMP su più testi e pattern di lunghezza variabile.
+#Confronta i tempi di esecuzione degli algoritmi Naive e KMP su più testi e pattern di lunghezza variabile.
 def execution_time_comparison(text_lengths, pattern_lengths,repetitions=10):
     naive_tuples = []
     kmp_tuples = []
