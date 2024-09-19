@@ -62,6 +62,7 @@ def execution_time_comparison(text_lengths, pattern_lengths, generate_fn, repeti
             kmp_tuples.append((text_length, pattern_length, kmp_time))
     return naive_tuples, kmp_tuples
 
+
 #per ogni lunghezza di pattern, crea un grafico con i tempi di esecuzione per entrambi gli algoritmi e lo salva.
 def plot_execution_time(naive_tuples, kmp_tuples, base_output_path, pattern_description):
     text_lengths = sorted(set(t[0] for t in naive_tuples))
@@ -92,6 +93,7 @@ def plot_execution_time(naive_tuples, kmp_tuples, base_output_path, pattern_desc
         file_path = os.path.join(output_path, filename)
         plt.savefig(file_path)
 
+
 # Funzione principale che esegue i test con diversi tipi di pattern
 def main(text_lengths_sets, pattern_lengths_sets, repetitions=10):
     base_output_path = os.path.join(os.path.expanduser('~'), 'Desktop', 'Latex images', 'Tempo esecuzione')
@@ -112,9 +114,8 @@ def main(text_lengths_sets, pattern_lengths_sets, repetitions=10):
             plot_execution_time(naive_tuples, kmp_tuples, base_output_path, string_description)
 
 
-
-
 if __name__ == "__main__":
+    # Definisci i set di lunghezze del testo e del pattern da utilizzare
     text_lengths_sets = {
         "small": [50, 100, 200],
         "medium": [500, 1000, 2000],
@@ -127,6 +128,5 @@ if __name__ == "__main__":
         "large": [3000, 5000]
     }
 
-for size in text_lengths_sets:
-        naive_tuples, kmp_tuples = execution_time_comparison(text_lengths_sets[size], pattern_lengths_sets[size])
-        plot_execution_time(naive_tuples, kmp_tuples)
+    # Esegui i test con i set di lunghezze specificati
+    main(text_lengths_sets, pattern_lengths_sets)
