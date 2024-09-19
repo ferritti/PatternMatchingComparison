@@ -1,32 +1,27 @@
 import random as rd
-import string as str
+import string
 import timeit
 import os
 
 from matplotlib import pyplot as plt
 
 def naive_string_matcher(T, P):
-    n = len(T)
-    m = len(P)
-    for s in range(n - m + 1):
-        if T[s:s + m] == P:
-            pass#print(f"Occorrenza del pattern con spostamento {s}")
+    for s in range(len(T) - len(P) + 1):
+        if T[s:s + len(P)] == P:
+            print(f"Occorrenza del pattern con spostamento {s}")
 
 
 def kmp_matcher(T, P):
-    n = len(T)
-    m = len(P)
-    lpc = compute_prefix_function(P, m)
+    lpc = compute_prefix_function(P, len(P))
     q = 0
-    for i in range(n):
+    for i in range(len(T)):
         while q > 0 and P[q] != T[i]:
-            q = lpc[q]
+            q = lpc[q - 1]
         if P[q] == T[i]:
             q += 1
-        if q == m:
-            #print(f"Occorrenza del pattern con spostamento {i - m + 1}")
+        if q == len(P):
+            print(f"Occorrenza del pattern con spostamento {i - len(P) + 1}")
             q = lpc[q - 1]
-
 
 def compute_prefix_function(P, m):
     pi = [0] * m
@@ -41,7 +36,7 @@ def compute_prefix_function(P, m):
 
 #Genera una stringa casuale di lunghezza specificata
 def generate_random_string(length):
-    return ''.join(rd.choice(str.ascii_lowercase) for _ in range(length))
+    return ''.join(rd.choice(string.ascii_lowercase) for _ in range(length))
 
 #Genera un pattern ripetuto frequentemente
 def generate_repeated_string(length):
@@ -56,7 +51,7 @@ def test_execution_time(text, pattern, repetitions):
 
 
 #Confronta i tempi di esecuzione degli algoritmi Naive e KMP su più testi e pattern di lunghezza variabile.
-def execution_time_comparison(text_lengths, pattern_lengths,repetitions=10):
+def execution_time_comparison(text_lengths, pattern_lengths, repetitions=10):
     naive_tuples = []
     kmp_tuples = []
 
@@ -65,7 +60,6 @@ def execution_time_comparison(text_lengths, pattern_lengths,repetitions=10):
             naive_time, kmp_time = test_execution_time(text_length, pattern_length,repetitions)
             naive_tuples.append((text_length, pattern_length, naive_time))
             kmp_tuples.append((text_length, pattern_length, kmp_time))
-
     return naive_tuples, kmp_tuples
 
 #per ogni lunghezza di pattern, crea un grafico con i tempi di esecuzione per entrambi gli algoritmi e lo salva.
