@@ -92,7 +92,24 @@ def plot_execution_time(naive_tuples, kmp_tuples, base_output_path, pattern_desc
         file_path = os.path.join(output_path, filename)
         plt.savefig(file_path)
 
+# Funzione principale che esegue i test con diversi tipi di pattern
+def main(text_lengths_sets, pattern_lengths_sets, repetitions=10):
+    base_output_path = os.path.join(os.path.expanduser('~'), 'Desktop', 'Latex images', 'Tempo esecuzione')
 
+    # Due casi: testo e pattern casuali, e testo e pattern ripetuti frequentemente
+    string_types = [
+        ("Testo e pattern casuale", generate_random_string),
+        ("Testo pattern ripetuto frequentemente", generate_repeated_string)
+    ]
+
+    for string_description, generate_fn in string_types:
+        for size in text_lengths_sets:
+            text_lengths = text_lengths_sets[size]
+            pattern_lengths = pattern_lengths_sets[size]
+
+            # Esegui i test e genera i grafici
+            naive_tuples, kmp_tuples = execution_time_comparison(text_lengths, pattern_lengths, generate_fn, repetitions)
+            plot_execution_time(naive_tuples, kmp_tuples, base_output_path, string_description)
 
 
 
