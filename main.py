@@ -63,14 +63,16 @@ def execution_time_comparison(text_lengths, pattern_lengths, generate_fn, repeti
     return naive_tuples, kmp_tuples
 
 #per ogni lunghezza di pattern, crea un grafico con i tempi di esecuzione per entrambi gli algoritmi e lo salva.
-def plot_execution_time(naive_tuples, kmp_tuples):
+def plot_execution_time(naive_tuples, kmp_tuples, base_output_path, pattern_description):
     text_lengths = sorted(set(t[0] for t in naive_tuples))
     pattern_lengths = sorted(set(t[1] for t in naive_tuples))
 
-    desktop_path = os.path.join(os.path.expanduser('~'), 'Desktop', 'Latex images', 'Tempo esecuzione')
+    # Imposta il percorso di destinazione basato sul tipo di pattern
+    output_path = os.path.join(base_output_path, pattern_description)
 
-    if not os.path.exists(desktop_path):
-        os.makedirs(desktop_path)
+    # Crea la cartella per salvare i grafici se non esiste
+    if not os.path.exists(output_path):
+        os.makedirs(output_path)
 
     for pattern_length in pattern_lengths:
         naive_times = [t[2] for t in naive_tuples if t[1] == pattern_length]
@@ -81,13 +83,13 @@ def plot_execution_time(naive_tuples, kmp_tuples):
         plt.plot(text_lengths, kmp_times, label='KMP', marker='o')
         plt.xlabel('Lunghezza testo')
         plt.ylabel('Tempo di esecuzione (secondi)')
-        plt.title(f'Confronto tempi di esecuzione con Pattern di lunghezza {pattern_length}')
+        plt.title(f'Confronto tempi di esecuzione con Pattern di lunghezza {pattern_length} ({pattern_description})')
         plt.legend()
         plt.grid(True)
 
-        #Salva il grafico nella cartella
-        filename = f'grafico lunghezza pattern {pattern_length}.png'
-        file_path = os.path.join(desktop_path, filename)
+        # Salva il grafico nella cartella specificata
+        filename = f'grafico_pattern_{pattern_length}_{pattern_description}.png'
+        file_path = os.path.join(output_path, filename)
         plt.savefig(file_path)
 
 
