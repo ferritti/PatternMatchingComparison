@@ -2,7 +2,6 @@ import random as rd
 import string
 import timeit
 import os
-
 from matplotlib import pyplot as plt
 
 def naive_string_matcher(T, P):
@@ -51,13 +50,14 @@ def test_execution_time(text, pattern, repetitions):
 
 
 #Confronta i tempi di esecuzione degli algoritmi Naive e KMP su più testi e pattern di lunghezza variabile.
-def execution_time_comparison(text_lengths, pattern_lengths, repetitions=10):
+def execution_time_comparison(text_lengths, pattern_lengths, generate_fn, repetitions=30):
     naive_tuples = []
     kmp_tuples = []
-
     for text_length in text_lengths:
         for pattern_length in pattern_lengths:
-            naive_time, kmp_time = test_execution_time(text_length, pattern_length,repetitions)
+            text = generate_fn(text_length)  # Usa la funzione per generare il testo
+            pattern = generate_fn(pattern_length)  # Usa la funzione per generare il pattern
+            naive_time, kmp_time = test_execution_time(text, pattern, repetitions)
             naive_tuples.append((text_length, pattern_length, naive_time))
             kmp_tuples.append((text_length, pattern_length, kmp_time))
     return naive_tuples, kmp_tuples
