@@ -101,7 +101,7 @@ def main(text_lengths_sets, pattern_lengths_sets, repetitions=10):
     # Due casi: testo e pattern casuali, e testo e pattern ripetuti frequentemente
     string_types = [
         ("Testo e pattern casuale", generate_random_string),
-        ("Testo pattern ripetuto frequentemente", generate_repeated_string)
+        ("Testo e pattern ripetuto frequentemente", generate_repeated_string)
     ]
 
     for string_description, generate_fn in string_types:
