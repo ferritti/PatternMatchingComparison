@@ -44,7 +44,7 @@ def generate_random_string(length):
     return ''.join(rd.choice(str.ascii_lowercase) for _ in range(length))
 
 #Genera un pattern ripetuto frequentemente
-def generate_repeated_pattern(length):
+def generate_repeated_string(length):
    return 'abc' * (length // 3) + 'abc'[:length % 3]
 
 
