@@ -95,7 +95,7 @@ def plot_execution_time(naive_tuples, kmp_tuples, base_output_path, pattern_desc
 
 
 # Funzione principale che esegue i test con diversi tipi di pattern
-def main(text_lengths_sets, pattern_lengths_sets, repetitions=30):
+def main(text_lengths_sets, pattern_lengths_sets, repetitions):
     base_output_path = os.path.join(os.path.expanduser('~'), 'Desktop', 'Latex images', 'Tempo esecuzione')
 
     # Due casi: testo e pattern casuali, e testo e pattern ripetuti frequentemente
@@ -115,18 +115,18 @@ def main(text_lengths_sets, pattern_lengths_sets, repetitions=30):
 
 
 if __name__ == "__main__":
-    # Definisci i set di lunghezze del testo e del pattern da utilizzare
+    #Set di lunghezze del testo e del pattern da utilizzare
     text_lengths_sets = {
-        "small": [50, 100, 200],
-        "medium": [500, 1000, 2000],
-        "large": [5000, 10000, 20000]
+        "small": [200, 500, 1000],
+        "medium": [2000, 5000, 10000],
+        "large": [20000, 50000, 100000]
     }
 
     pattern_lengths_sets = {
-        "small": [20, 30],
-        "medium": [200, 500],
-        "large": [3000, 5000]
+        "small": [70, 130],
+        "medium": [700, 1300],
+        "large": [7000, 13000]
     }
 
-    # Esegui i test con i set di lunghezze specificati
-    main(text_lengths_sets, pattern_lengths_sets)
+    #Esegue i test con i set di lunghezze specificati
+    main(text_lengths_sets, pattern_lengths_sets,30)
