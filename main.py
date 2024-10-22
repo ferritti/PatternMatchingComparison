@@ -108,7 +108,7 @@ def main(text_lengths_sets, pattern_lengths_sets, repetitions):
     # Due casi: testo e pattern casuali, e testo e pattern ripetuti frequentemente
     string_types = [
         ("Testo e pattern casuale", generate_random_string),
-        ("Testo e pattern ripetuto frequentemente", generate_long_prefix_suffix_string)
+        ("Pattern con prefissi e suffissi ripetuto nel testo", generate_repeated_pattern_string)
     ]
 
     for string_description, generate_fn in string_types:
