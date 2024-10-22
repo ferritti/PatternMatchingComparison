@@ -37,10 +37,10 @@ def compute_prefix_function(P, m):
 def generate_random_string(length):
     return ''.join(rd.choice(string.ascii_lowercase) for _ in range(length))
 
-#Genera un pattern ripetuto frequentemente
-def generate_repeated_string(length):
-   return 'abc' * (length // 3) + 'abc'[:length % 3]
-
+def generate_random_text_and_pattern(length_text, length_pattern):
+    text = generate_random_string(length_text)
+    pattern = generate_random_string(length_pattern)
+    return text, pattern
 
 #Tempo di esecuzione medio per una serie di ripetizioni di naive e kmp con text e pattern in input
 def test_execution_time(text, pattern, repetitions):
@@ -101,7 +101,7 @@ def main(text_lengths_sets, pattern_lengths_sets, repetitions):
     # Due casi: testo e pattern casuali, e testo e pattern ripetuti frequentemente
     string_types = [
         ("Testo e pattern casuale", generate_random_string),
-        ("Testo e pattern ripetuto frequentemente", generate_repeated_string)
+        ("Testo e pattern ripetuto frequentemente", generate_long_prefix_suffix_string)
     ]
 
     for string_description, generate_fn in string_types:
