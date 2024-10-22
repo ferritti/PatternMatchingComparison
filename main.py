@@ -99,14 +99,13 @@ def plot_execution_time(naive_tuples, kmp_tuples, base_output_path, pattern_desc
         file_path = os.path.join(output_path, filename)
         plt.savefig(file_path)
 
-
 # Funzione principale che esegue i test con diversi tipi di pattern
 def main(text_lengths_sets, pattern_lengths_sets, repetitions):
     base_output_path = os.path.join(os.path.expanduser('~'), 'Desktop', 'Latex images', 'Tempo esecuzione')
 
     # Due casi: testo e pattern casuali, e testo e pattern ripetuti frequentemente
     string_types = [
-        ("Testo e pattern casuale", generate_random_string),
+        ("Testo e pattern casuale", generate_random_text_and_pattern),
         ("Pattern con prefissi e suffissi ripetuto nel testo", generate_repeated_pattern_string)
     ]
 
