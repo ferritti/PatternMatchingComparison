@@ -117,15 +117,15 @@ def main(text_lengths_sets, pattern_lengths_sets, repetitions):
 if __name__ == "__main__":
     #Set di lunghezze del testo e del pattern da utilizzare
     text_lengths_sets = {
-        "small": [200, 500, 1000],
-        "medium": [2000, 5000, 10000],
-        "large": [20000, 50000, 100000]
+        "small": [100, 500, 1000, 2500, 5000],
+        "medium": [10000, 25000, 50000, 75000, 100000],
+        "large": [150000, 250000, 350000, 450000, 500000]
     }
 
     pattern_lengths_sets = {
-        "small": [70, 130],
-        "medium": [700, 1300],
-        "large": [7000, 13000]
+        "small": [50, 100],
+        "medium":  [1000, 1500],
+        "large": [10000, 20000]
     }
 
     #Esegue i test con i set di lunghezze specificati
