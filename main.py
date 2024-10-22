@@ -42,6 +42,13 @@ def generate_random_text_and_pattern(length_text, length_pattern):
     pattern = generate_random_string(length_pattern)
     return text, pattern
 
+def generate_repeated_pattern_string(length_text, length_pattern):
+    prefix = ''.join(rd.choices(string.ascii_lowercase, k=length_pattern // 4))
+    middle = ''.join(rd.choices(string.ascii_lowercase, k=length_pattern // 2))
+    pattern = prefix + middle + prefix  # Prefisso e suffisso uguali
+    text = (pattern * (length_text // len(pattern) + 1))[:length_text]  # Testo con ripetizioni
+    return text, pattern
+
 #Tempo di esecuzione medio per una serie di ripetizioni di naive e kmp con text e pattern in input
 def test_execution_time(text, pattern, repetitions):
    naive_time = timeit.timeit(lambda: naive_string_matcher(text, pattern), number=repetitions) / repetitions
