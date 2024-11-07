@@ -74,10 +74,10 @@ def plot_execution_time(naive_tuples, kmp_tuples, base_output_path, pattern_desc
     text_lengths = sorted(set(t[0] for t in naive_tuples))
     pattern_lengths = sorted(set(t[1] for t in naive_tuples))
 
-    # Imposta il percorso di destinazione basato sul tipo di pattern
+    #Imposta il percorso di destinazione basato sul tipo di pattern
     output_path = os.path.join(base_output_path, pattern_description)
 
-    # Crea la cartella per salvare i grafici se non esiste
+    #Crea la cartella per salvare i grafici se non esiste
     if not os.path.exists(output_path):
         os.makedirs(output_path)
 
@@ -94,16 +94,16 @@ def plot_execution_time(naive_tuples, kmp_tuples, base_output_path, pattern_desc
         plt.legend()
         plt.grid(True)
 
-        # Salva il grafico nella cartella specificata
+        #Salva il grafico nella cartella specificata
         filename = f'grafico_pattern_{pattern_length}_{pattern_description}.png'
         file_path = os.path.join(output_path, filename)
         plt.savefig(file_path)
 
-# Funzione principale che esegue i test con diversi tipi di pattern
+#Funzione principale che esegue i test con diversi tipi di pattern
 def main(text_lengths_sets, pattern_lengths_sets, repetitions):
     base_output_path = os.path.join(os.path.expanduser('~'), 'Desktop', 'Latex images', 'Tempo esecuzione')
 
-    # Due casi: testo e pattern casuali, e testo e pattern ripetuti frequentemente
+    #Due casi: testo e pattern casuali, e pattern con suffisso e prefisso uguali ripetuto nel testo
     string_types = [
         ("Testo e pattern casuali", generate_random_text_and_pattern),
         ("Pattern con prefissi e suffissi ripetuto nel testo", generate_repeated_pattern_string)
@@ -114,7 +114,7 @@ def main(text_lengths_sets, pattern_lengths_sets, repetitions):
             text_lengths = text_lengths_sets[size]
             pattern_lengths = pattern_lengths_sets[size]
 
-            # Esegui i test e genera i grafici
+            #Esegui i test e genera i grafici
             naive_tuples, kmp_tuples = execution_time_comparison(text_lengths, pattern_lengths, generate_fn, repetitions)
             plot_execution_time(naive_tuples, kmp_tuples, base_output_path, string_description)
 
