@@ -14,4 +14,4 @@ String matching is a fundamental problem in computer science, with applications 
 
 ## Documentation
 
-For a detailed explanation of the algorithms, implementation details, and performance analysis, please refer to the full documentation (in Italian) [here](https://drive.google.com/file/d/1J2ATixg-Ayfmk21tn1dINZnZG7RPfp4M/view?usp=sharing).
+For a detailed explanation of the algorithms, implementation details, and performance analysis, please refer to the full documentation (in Italian) [here](https://github.com/ferritti/PatternMatchingComparison/blob/main/PatternMatchingComparison.pdf).
